@@ -1,0 +1,46 @@
+import camion2.*
+import cosas2.*
+
+describe "cargar de todo al camion"{
+	method initialize(){
+		embalajeDeSeguridad.embalarCosa(paqueteDeLadrillos)
+		paqueteDeLadrillos.cantLadrillos(1000)
+		contenedorPortuario.agregarAlContenedor([knightRider, arenaDeGranel, residuosRadioactivos])
+		camion.cargar(knightRider)
+		camion.cargar(arenaDeGranel)
+		camion.cargar(residuosRadioactivos)
+		
+		camion.cargar(bumblebee)
+		camion.cargar(embalajeDeSeguridad)
+		
+		camion.cargar(paqueteDeLadrillos)
+		
+		camion.cargar(bateriaAntiaerea)
+		
+		camion.cargar(contenedorPortuario)
+		
+	}
+	test "total de bultos es 11"{
+		assert.equals(camion.totalBultos(), 11)
+	}
+	test "total Opcion2 de bultos es 11"{
+		assert.equals(camion.totalBultosOpcion2(), 16)
+	}
+	test "bumblebee es Robot y su peligrosidad es 30"{
+		assert.equals(bumblebee.nivelPeligrosidad(), 30)
+	}
+	test "se agregaron 12 ladrillos y ahora tiene 1012"{
+		assert.equals(paqueteDeLadrillos.peso()/2, 1012)
+	}
+	test "arena tiene 20kg mas, tenia 0"{
+		assert.equals(arenaDeGranel.peso(), 20)
+	}
+	test "bateria cargada,"{
+		assert.that(bateriaAntiaerea.estaConMisiles())
+	}
+	test "contenedor, kight no reacciona, arena agrega 20kg tenia 0, residuos agrega 15 tenia 0"{
+		assert.equals(contenedorPortuario.cosas().get(1).peso(), 20)
+		assert.equals(contenedorPortuario.cosas().get(2).peso(), 15)
+	}
+	
+}

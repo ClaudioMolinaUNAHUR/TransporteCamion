@@ -1,0 +1,49 @@
+import cosas.*
+import camion.*
+
+describe "cargar camion con muchas cosas" {
+	method initialize(){
+		bumblebee.transformar()
+		arenaDeGranel.peso(150)
+		bateriaAntiaerea.configurarMisiles(true)
+		paqueteDeLadrillos.cantLadrillos(80)
+		embalajeDeSeguridad.embalarCosa(paqueteDeLadrillos)
+		camion.cargar(bumblebee)
+		camion.cargar(arenaDeGranel)
+		camion.cargar(bateriaAntiaerea)
+		camion.cargar(embalajeDeSeguridad)
+	}
+	test "son todos los Pesos Par"{
+		assert.that(camion.todoPesoPar())
+	}
+	test "embalaje peso 160"{
+		assert.that(camion.hayAlgunoQuePesa(160))
+	}
+	test "nivel del arena es 1"{
+		assert.equals(camion.elDeNivel(1),arenaDeGranel )
+	}
+	test "peso total"{
+		assert.equals(camion.pesoTotal(), 2410)
+	}
+	test "no esta excedido"{
+		assert.that(camion.excedidoDePeso())
+	}
+	test "2 objetos superan nivel 3"{
+		assert.equals(camion.objetosQueSuperanPeligrosidad(3), [bumblebee, bateriaAntiaerea])
+	}
+	test "no hay elemento mas peligroso que el radioactivo"{
+		assert.equals(camion.objetosMasPeligrososQue(residuosRadioactivos).size(), 0)
+	}
+	test "puede circular"{
+		assert.that(camion.puedeCircularEnRuta(100))
+	}
+	test "los ladrillos pesan 160kg y estan entre 120 y 180"{
+		assert.that(camion.tieneAlgoQuePesaEntre(120, 180))
+	}
+	test "bumblebee el mas pesado"{
+		assert.equals(camion.cosaMasPesada(), bumblebee)
+	}
+	test "la lista de pesos"{
+		assert.equals(camion.pesos(), [800, 150, 300, 160])
+	}
+}

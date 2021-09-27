@@ -1,0 +1,29 @@
+import camion.*
+import cosas.*
+
+test "añadir Ladrillos y pesar" {
+	paqueteDeLadrillos.cantLadrillos(10)
+	assert.equals(paqueteDeLadrillos.peso(), 20)
+}
+
+test "bateria antiaerea pesar y nivel" {
+	assert.equals(bateriaAntiaerea.peso(), 300)
+	assert.equals(bateriaAntiaerea.nivelPeligrosidad(), 100)
+	bateriaAntiaerea.configurarMisiles(false)
+	assert.equals(bateriaAntiaerea.peso(), 200)
+	assert.equals(bateriaAntiaerea.nivelPeligrosidad(), 0)
+}
+
+test "embalar residuos 30kg"{
+	residuosRadioactivos.peso(30)
+	embalajeDeSeguridad.embalarCosa(residuosRadioactivos)
+	assert.equals(embalajeDeSeguridad.peso(), 30)
+	assert.equals(embalajeDeSeguridad.nivelPeligrosidad(), 100)
+}
+
+test "contenedor con bumblebee y knightRider"{
+	contenedorPortuario.agregarAlContenedor(bumblebee)
+	contenedorPortuario.agregarAlContenedor(knightRider)
+	assert.equals(contenedorPortuario.peso(), 1400)
+	assert.equals(contenedorPortuario.nivelPeligrosidad(), 15)
+}
