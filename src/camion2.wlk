@@ -33,6 +33,6 @@ object camion {
 		return bultos
 	}
 	method totalBultosOpcion2(){
-		return cosas.sum({cantBulto => cantBulto.bulto()})
+		return cosas.sum({cantBultos => cantBultos.bulto()})
 	}
 }
